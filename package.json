@@ -1,0 +1,19 @@
+{
+  "name": "gulp-brfs",
+  "version": "0.0.1",
+  "description": "fs.readFileSync() static asset inliner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gulp",
+    "brfs"
+  ],
+  "author": "George Czabania",
+  "license": "MIT",
+  "dependencies": {
+    "brfs": "^1.1.1",
+    "through2": "^0.4.1"
+  }
+}
