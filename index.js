@@ -19,3 +19,6 @@ module.exports = function () {
   });
 
 };
+
+// expose core brfs module
+module.exports.brfs = brfs;

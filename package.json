@@ -1,6 +1,6 @@
 {
   "name": "gulp-brfs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "fs.readFileSync() static asset inliner",
   "main": "index.js",
   "scripts": {
