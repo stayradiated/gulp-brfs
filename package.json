@@ -1,8 +1,9 @@
 {
   "name": "gulp-brfs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "fs.readFileSync() static asset inliner",
   "main": "index.js",
+  "repository": "https://github.com/stayradiated/gulp-brfs.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
