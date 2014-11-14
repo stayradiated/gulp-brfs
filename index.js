@@ -5,7 +5,7 @@ module.exports = function () {
 
   return through.obj(function (file, enc, callback) {
     if (file.isBuffer()) {
-      file.contents = file.pipe(brfs());
+      file.contents = new Buffer(file.pipe(brfs()));
     }
 
     if (file.isStream()) {
