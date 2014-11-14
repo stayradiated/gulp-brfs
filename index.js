@@ -1,26 +1,32 @@
 var brfs = require('brfs');
 var through = require('through2');
 var gutil = require('gulp-util');
-
-var PluginError = gutil.PluginError;
+var bl = require('bl');
 
 const PLUGIN_NAME = 'gulp-brfs'
+
+var PluginError = gutil.PluginError;
 
 module.exports = function () {
 
   return through.obj(function (file, enc, callback) {
+    var stream = brfs(file.path);
+
     if (file.isBuffer()) {
-      this.emit('error', new PluginError(PLUGIN_NAME, 'Buffers not supported!'));
-      return callback();
+      var self = this;
+      file.pipe(stream).pipe(bl(function(err, data){
+        file.contents = data;
+        self.push(file);
+        return callback();
+      }));
     }
 
     if (file.isStream()) {
-      var stream = brfs(file.path);
       file.contents = file.contents.pipe(stream);
+      this.push(file);
+      return callback();
     }
 
-    this.push(file);
-    return callback();
   });
 
 };
