@@ -9,7 +9,8 @@
   },
   "keywords": [
     "gulp",
-    "brfs"
+    "brfs",
+    "gulpplugin"
   ],
   "author": "George Czabania",
   "license": "MIT",
