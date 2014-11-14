@@ -1,11 +1,11 @@
 {
   "name": "gulp-brfs",
-  "version": "0.0.5",
-  "description": "fs.readFileSync() static asset inliner",
+  "version": "0.1.0",
+  "description": "fs.readFileSync() static asset inliner with gulp",
   "main": "index.js",
   "repository": "https://github.com/stayradiated/gulp-brfs.git",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp --base test --gulpfile test/gulpfile.js"
   },
   "keywords": [
     "gulp",
@@ -16,8 +16,13 @@
   "license": "MIT",
   "dependencies": {
     "bl": "^0.9.3",
-    "brfs": "^1.1.1",
+    "brfs": "^1.2.0",
     "gulp-util": "^3.0.1",
-    "through2": "^0.5.1"
+    "through2": "^0.6.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-rename": "^1.2.0"
   }
 }
