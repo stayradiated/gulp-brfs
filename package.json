@@ -14,6 +14,7 @@
   "author": "George Czabania",
   "license": "MIT",
   "dependencies": {
+    "bl": "^0.9.3",
     "brfs": "^1.1.1",
     "through2": "^0.5.1"
   }
