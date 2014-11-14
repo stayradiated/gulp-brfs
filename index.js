@@ -4,6 +4,8 @@ var gutil = require('gulp-util');
 
 var PluginError = gutil.PluginError;
 
+const PLUGIN_NAME = 'gulp-brfs'
+
 module.exports = function () {
 
   return through.obj(function (file, enc, callback) {
