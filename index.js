@@ -18,10 +18,10 @@ module.exports = function () {
 
     if (file.isStream()) {
       file.contents = file.contents.pipe(stream);
+      this.push(file);
+      return callback();
     }
 
-    this.push(file);
-    return callback();
   });
 
 };
