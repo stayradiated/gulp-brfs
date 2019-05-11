@@ -1,26 +1,43 @@
 var gulp   = require('gulp');
 var clean  = require('gulp-clean');
+var log    = require('fancy-log');
 var rename = require('gulp-rename');
 
 var brfs = require('../index');
 
-gulp.task('default', ['stream', 'buffer']);
+var src = gulp.src;
+var dest = gulp.dest;
+var parallel = gulp.parallel;
+var series = gulp.series;
 
-gulp.task('stream', function () {
-  return gulp.src('./source.js', {buffer: false})
+function stream() {
+  var isStream = false;
+
+  return src('./source.js', {buffer: false})
+    .on('data', function (data) {
+      log.info('Stream `isStream()`', data.isStream());
+    })
     .pipe(brfs())
     .pipe(rename('stream.js'))
-    .pipe(gulp.dest('./output'));
-});
+    .pipe(dest('./output'));
+}
+stream.displayName = 'test:streams';
 
-gulp.task('buffer', function () {
-  return gulp.src('./source.js', {buffer: true})
+function buffer() {
+  return src('./source.js', {buffer: true})
+    .on('data', function (data) {
+      log.info('Buffer `isBuffer()`', data.isBuffer())
+    })
     .pipe(brfs())
     .pipe(rename('buffer.js'))
-    .pipe(gulp.dest('./output'));
-});
+    .pipe(dest('./output'));
+}
+buffer.displayName = 'test:buffers';
 
-gulp.task('clean', function () {
-  return gulp.src('./output/*.js', {read: false})
+function cleanTests() {
+  return src('./output/*.js', {read: false})
     .pipe(clean());
-});
+}
+cleanTests.displayName = 'clean';
+
+exports.default = series(cleanTests, parallel(stream, buffer));

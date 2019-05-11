@@ -1,24 +1,26 @@
 var brfs = require('brfs');
 var through = require('through2');
-var gutil = require('gulp-util');
-var bl = require('bl');
-
-const PLUGIN_NAME = 'gulp-brfs'
-
-var PluginError = gutil.PluginError;
+var Vinyl = require('vinyl');
 
 module.exports = function () {
 
   return through.obj(function (file, enc, callback) {
     var stream = brfs(file.path);
+    var inline;
 
     if (file.isBuffer()) {
-      var self = this;
-      file.pipe(stream).pipe(bl(function(err, data){
-        file.contents = data;
-        self.push(file);
-        return callback();
-      }));
+      stream.end(file.contents);
+
+      inline = new Vinyl({
+        contents: stream,
+        cwd: file.cwd,
+        base: file.base,
+        path: file.path
+      });
+
+      this.push(inline);
+
+      return callback();
     }
 
     if (file.isStream()) {
@@ -30,6 +32,3 @@ module.exports = function () {
   });
 
 };
-
-// expose core brfs module
-module.exports.brfs = brfs;
